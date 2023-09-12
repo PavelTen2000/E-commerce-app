@@ -31,7 +31,7 @@ const CartMenu = () => {
 
     return (
         <Box
-            display={true ? 'block' : 'none'}
+            display={isCartOpen ? 'block' : 'none'}
             bgcolor={'rgba(0,0,0,0.4'}
             position={'fixed'}
             zIndex={10}
@@ -62,9 +62,105 @@ const CartMenu = () => {
                     <Box>
                         {cart.map((item) => (
                             <Box key={`${item.attributes.name}-${item.id}`}>
-                                <FlexBox p="15px 0"></FlexBox>
+                                <FlexBox p="15px 0">
+                                    <Box flex={'1 1 40%'}>
+                                        <img
+                                            alt={item?.name}
+                                            width={'123px'}
+                                            height={'164'}
+                                            src={`http://localhost:1337${item?.attributes?.image?.data?.attributes?.formats?.medium?.url}`}
+                                        />
+                                    </Box>
+                                    <Box flex={'1 1 60%'}>
+                                        <FlexBox mb="5px">
+                                            <Typography fontWeight={'bold'}>
+                                                {item.attributes.name}
+                                            </Typography>
+                                            <IconButton
+                                                onClick={() =>
+                                                    dispatch(
+                                                        removeFromCart({
+                                                            id: item.id,
+                                                        })
+                                                    )
+                                                }
+                                            >
+                                                <CloseIcon></CloseIcon>
+                                            </IconButton>
+                                        </FlexBox>
+                                        <Typography>
+                                            {item.attributes.shortDescription}
+                                        </Typography>
+                                        <FlexBox m={'15px 0'}>
+                                            <Box
+                                                display={'flex'}
+                                                alignItems={'center'}
+                                                border={`1.5px solid ${shades.neutral[500]}`}
+                                            >
+                                                <IconButton
+                                                    onClick={() =>
+                                                        dispatch(
+                                                            decreaseCount({
+                                                                id: item.id,
+                                                            })
+                                                        )
+                                                    }
+                                                >
+                                                    <RemoveIcon></RemoveIcon>
+                                                </IconButton>
+                                                <Typography>
+                                                    {item.count}
+                                                </Typography>
+                                                <IconButton
+                                                    onClick={() =>
+                                                        dispatch(
+                                                            increaseCount({
+                                                                id: item.id,
+                                                            })
+                                                        )
+                                                    }
+                                                >
+                                                    <AddIcon />
+                                                </IconButton>
+                                            </Box>
+                                            {/* Price  */}
+                                            <Typography fontWeight={'bold'}>
+                                                ${item.attributes.price}
+                                            </Typography>
+                                        </FlexBox>
+                                    </Box>
+                                </FlexBox>
+                                <Divider />
                             </Box>
                         ))}
+                    </Box>
+
+                    {/* Actions */}
+                    <Box m={'20px 0'}>
+                        <FlexBox>
+                            <Typography fontWeight={'bold'}>
+                                SUBTOTAL
+                            </Typography>
+                            <Typography fontWeight={'bold'}>
+                                ${totalPrice}
+                            </Typography>
+                        </FlexBox>
+                        <Button
+                            sx={{
+                                bgcolor: shades.primary[400],
+                                color: 'white',
+                                borderRadius: 0,
+                                minWidth: '100%',
+                                padding: '20px 40px',
+                                m: '20px 0',
+                            }}
+                            onClick={() => {
+                                navigate('/checkout');
+                                dispatch(setIsCartOpen({}));
+                            }}
+                        >
+                            CHECKOUT
+                        </Button>
                     </Box>
                 </Box>
             </Box>
