@@ -9,11 +9,12 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { shades } from '../../theme';
 import { setIsCartOpen } from '../../state';
-
+import { UseSelector } from 'react-redux/es/hooks/useSelector';
 const Navbar = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const cart = useSelector((state) => state.cart.cart);
+    const isCartOpen = useSelector((state) => state.cart.isCartOpen);
     return (
         <Box
             display="flex"

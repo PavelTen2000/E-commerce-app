@@ -11,7 +11,7 @@ import state, {
     decreaseCount,
     setIsCartOpen,
 } from '../../state';
-import { useNavigate, useResolvedPath } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const FlexBox = styled(Box)`
     display: flex;
@@ -24,7 +24,6 @@ const CartMenu = () => {
     const dispatch = useDispatch();
     const cart = useSelector((state) => state.cart.cart);
     const isCartOpen = useSelector((state) => state.cart.isCartOpen);
-
     const totalPrice = cart.reduce((total, item) => {
         return total + item.count * item.attributes.price;
     }, 0);

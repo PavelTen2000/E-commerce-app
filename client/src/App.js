@@ -22,7 +22,7 @@ function App() {
         <div className="app">
             <BrowserRouter>
                 <Navbar />
-                <CartMenu />
+
                 <ScrollToTop />
                 <Routes>
                     <Route path="/" element={<Home />}></Route>

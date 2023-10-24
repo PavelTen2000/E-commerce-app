@@ -65,7 +65,7 @@ function Footer() {
                         50 north Whatever Blvd, Washington, DC 10501
                     </Typography>
                     <Typography mb="30px" sx={{ wordWrap: 'break-word' }}>
-                        Email: mredwardroh@gmail.com
+                        Email: paveltenfs@gmail.com
                     </Typography>
                     <Typography mb="30px">(222)333-4444</Typography>
                 </Box>
